@@ -12,7 +12,7 @@ pipeline {
                 {
                     // checking out repository
                     git branch: 'master',
-                        //credentialsId: 'holman',
+                        credentialsId: 'holman',
                         url: 'https://gitlab.com/holman.cabezas/testing-nivelics.git'
                 }
             }

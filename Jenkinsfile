@@ -13,7 +13,7 @@ pipeline {
                     // checking out repository
                     git branch: 'master',
                         credentialsId: 'holman',
-                        url: 'https://gitlab.com/holman.cabezas/testing-nivelics.git'
+                        url: 'https://github.com/holmansnc/simple-java-maven.git'
                 }
             }
         stage('Build') {

@@ -26,5 +26,34 @@ pipeline {
                 sh './jenkins/scripts/deliver.sh'
             }
         }
+    },
+    post {
+        always
+        {
+            // Generate Allure Report
+            generateAllureReport()
+        }
     }
 }
+
+
+
+// Generate Allure report function
+def generateAllureReport()
+    {
+        try
+        {
+            allure([
+                    commandline      : '2.5.0',
+                    includeProperties: false,
+                    jdk              : '',
+                    properties       : [[key: 'allure.tests.management.pattern', value: 'http://tms.company.com/%s']],
+                    reportBuildPolicy: 'ALWAYS',
+                    results          : [[path: '/allure-results']]
+            ])
+        }
+        catch (error)
+        {
+            error.message
+        }
+    }

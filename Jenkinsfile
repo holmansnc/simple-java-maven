@@ -6,6 +6,16 @@ pipeline {
         }
     }
     stages {
+        stage('SCM: code update')
+            {
+                steps
+                {
+                    // checking out repository
+                    git branch: 'master',
+                        //credentialsId: 'holman',
+                        url: 'https://gitlab.com/holman.cabezas/testing-nivelics.git'
+                }
+            }
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
@@ -26,7 +36,7 @@ pipeline {
                 sh './jenkins/scripts/deliver.sh'
             }
         }
-    },
+    }
     post {
         always
         {
@@ -35,8 +45,6 @@ pipeline {
         }
     }
 }
-
-
 
 // Generate Allure report function
 def generateAllureReport()
